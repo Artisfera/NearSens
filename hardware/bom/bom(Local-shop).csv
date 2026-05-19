@@ -1,13 +1,14 @@
-lp.,Nazwa,Cena jednostkowa (Brutto),Iloœæ,Cena koñcowa (Brutto),Odnoœnik,Uwagi
-1,ATTINY1626-SU ,"5,9286",1,"5,9286",https://www.tme.eu/pl/details/attiny1626-su/rodzina-avr-8-bit/microchip-technology/,
-2,BC557B ,"0,5221",1,"0,5221",https://www.tme.eu/pl/details/bc557b-dio/tranzystory-pnp-tht/diotec-semiconductor/bc557b/,
-3,LM324DT,"1,059",1,"1,059",https://www.tme.eu/pl/details/lm324dt/wzmacniacze-operacyjne-smd/stmicroelectronics/,
-4,HC-SR04,"5,29",1,"5,29",http://kamami.pl/czujniki-odleglosci/197762-modhc-sr04-ultradzwiekowy-czujnik-odleglosci-do-5-metrow-5906623440283.html,"Planowane u¿ycie do demonta¿u przetworników, jak i uk³adu scalonego MAX232,w celu zmniejszenia kosztów."
-5,CD4543BE,"3,28",3,"9,84",https://www.tme.eu/pl/details/cd4543be/dekodery-multipleksery-przelaczniki/texas-instruments/,
-6,DE123-RS-20/7.5,"9,4833",1,"9,4833",https://www.tme.eu/pl/details/de123-rs-20_7.5/wyswietlacze-lcd-cyfrowe/display-elektronik/de-123-rs-20-7-5/,
-7,TACT-67N-F,"0,4469",10,"4,469",https://www.tme.eu/pl/en/details/tact-67n-f/microswitches-tact/ninigi/,
-8,VG18035A ,"3,7171",1,"3,7171",https://www.tme.eu/pl/en/details/pc-g2.1/dc-power-connectors/changzhou-dahua-imp-and-exp-group-co/vg18035a/,
-,,,,0,,
-,,,,0,,
-,,,,0,,
-,,,,0,,
+"Lp","Nazwa","Cena jednostkowa (Brutto)","Iloœæ","Cena koñcowa (Brutto)","Odnoœnik"
+1,"ATTINY1626-SU","5,9286",1,"=C2*D2","https://www.tme.eu/pl/details/attiny1626-su/rodzina-avr-8-bit/microchip-technology/"
+2,"BC857A-DIO","0,16",1,"=C3*D3","https://www.tme.eu/pl/details/bc857a-dio/tranzystory-pnp-smd/diotec-semiconductor/bc857a/"
+3,"LM324DT","1,059",1,"=C4*D4","https://www.tme.eu/pl/details/lm324dt/wzmacniacze-operacyjne-smd/stmicroelectronics/"
+4,"HC-SR04","5,29",1,"=C5*D5","http://kamami.pl/czujniki-odleglosci/197762-modul-hc-sr04-ultradzwiekowy-czujnik-odleglosci-do-5-metrow-5906623440283.html"
+5,"MC14543BDG","2,42",3,"=C6*D6","https://www.tme.eu/pl/details/mc14543bdg/dekodery-multipleksery-przelaczniki/onsemi/"
+6,"DE 117-TS-20/7,5/V","6,63",1,"=C7*D7","https://www.tme.eu/pl/details/de117-ts-20_7.5/wyswietlacze-lcd-cyfrowe/display-elektronik/de-117-ts-20-7-5-v/"
+7,"TACT switch","0,29",5,"=C8*D8","https://www.tme.eu/pl/details/tact4101-113160-a/mikroprzelaczniki-tact/connfly/ds1041-01-113kka16010/"
+8,"VG18035A","3,7171",1,"=C9*D9","https://www.tme.eu/pl/en/details/pc-g2.1/dc-power-connectors/changzhou-dahua-imp-and-exp-group-co/vg18035a/"
+9,"Kondensator ceramiczny 100nF","0,27",7,"=C10*D10","https://www.tme.eu/pl/details/0603b104j500ct/kondensatory-mlcc-smd/walsin/"
+10,"Rezystor 1k?","0,05",1,"=C11*D11","https://www.tme.eu/pl/details/erj3geyj102v/rezystory-smd/panasonic/"
+11,"Potencjometr 5k?","0,385",10,"=C12*D12","https://www.tme.eu/pl/details/rkt6v-5k/potencjometry-tht-jednoobrotowe/sr-passives/"
+12,"Terminal 2-pin","1,67",1,"=C13*D13","https://www.tme.eu/pl/en/details/tad05-02-1-l-g/pcb-terminal-blocks/gct/"
+,,,,"=SUMA(E2:E12)",

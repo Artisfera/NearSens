@@ -1,0 +1,13 @@
+Name,Purpose,Quantity,Total Cost (USD),Link,Distributor
+ATTINY1626-SU,"Main microcontroller for measurement processing, control logic, and LCD driving",1,1.65,https://www.tme.eu/pl/details/attiny1626-su/rodzina-avr-8-bit/microchip-technology/,TME
+BC857A-DIO,PNP transistor used for switching/control in the circuit,1,0.04,https://www.tme.eu/pl/details/bc857a-dio/tranzystory-pnp-smd/diotec-semiconductor/bc857a/,TME
+LM324DT,Operational amplifier for analog signal conditioning in the sensing circuit,1,0.29,https://www.tme.eu/pl/details/lm324dt/wzmacniacze-operacyjne-smd/stmicroelectronics/,TME
+HC-SR04,Donor ultrasonic module used as a source of the transmitter and receiver transducers,1,1.47,http://kamami.pl/czujniki-odleglosci/197762-modul-hc-sr04-ultradzwiekowy-czujnik-odleglosci-do-5-metrow-5906623440283.html,Kamami
+MC14543BDG,BCD to 7-segment LCD driver ICs for the display digits,3,2.02,https://www.tme.eu/pl/details/mc14543bdg/dekodery-multipleksery-przelaczniki/onsemi/,TME
+"DE 117-TS-20/7,5/V",3-digit LCD display for showing the measured distance,1,1.84,https://www.tme.eu/pl/details/de117-ts-20_7.5/wyswietlacze-lcd-cyfrowe/display-elektronik/de-117-ts-20-7-5-v/,TME
+TACT switch,Tactile push buttons for user input and testing,5,0.40,https://www.tme.eu/pl/details/tact4101-113160-a/mikroprzelaczniki-tact/connfly/ds1041-01-113kka16010/,TME
+VG18035A,DC power connector for 5 V input,1,1.03,https://www.tme.eu/pl/en/details/pc-g2.1/dc-power-connectors/changzhou-dahua-imp-and-exp-group-co/vg18035a/,TME
+100 nF ceramic capacitor,Decoupling and supply filtering capacitors for the circuit,7,0.52,https://www.tme.eu/pl/details/0603b104j500ct/kondensatory-mlcc-smd/walsin/,TME
+1 kOhm resistor,General-purpose resistor for signal/control biasing in the circuit,1,0.01,https://www.tme.eu/pl/details/erj3geyj102v/rezystory-smd/panasonic/,TME
+5 kOhm potentiometer,Adjustment and calibration of the analog sensing circuit,10,1.07,https://www.tme.eu/pl/details/rkt6v-5k/potencjometry-tht-jednoobrotowe/sr-passives/,TME
+Terminal 2-pin,Terminal for external 5 V power connection,1,0.46,https://www.tme.eu/pl/en/details/tad05-02-1-l-g/pcb-terminal-blocks/gct/,TME
