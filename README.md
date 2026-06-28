@@ -125,3 +125,9 @@ Commercial use is not granted by these licenses. Contact the author for separate
 ## Author
 
 Patryk Ankudowicz (Artisfera)
+
+
+
+![37985225-6b87-468d-819c-fa1fb3e9c759](https://stasis.hackclub-assets.com/images/1782644021175-dzq1qj.jpg)
+![0deb3eeb-d8f6-42e3-ba4b-9c512cce84f7](https://stasis.hackclub-assets.com/images/1782644021235-uzoq6a.jpg)
+![9b99e4cb-7a58-41e2-9bc0-3cf050692205](https://stasis.hackclub-assets.com/images/1782644021241-bn8yt4.jpg)
