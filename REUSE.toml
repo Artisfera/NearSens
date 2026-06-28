@@ -1,0 +1,25 @@
+version = 1
+
+[[annotations]]
+path = [
+  "README.md",
+  "JOURNAL.md",
+  ".gitignore",
+  "NOTICE",
+  "docs/**",
+  "hardware/**",
+  "bom/**",
+  "revisions/**"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Patryk Ankudowicz"
+SPDX-License-Identifier = "CC-BY-NC-SA-4.0"
+
+[[annotations]]
+path = [
+  "firmware/**",
+  "revisions/firmware/**"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Patryk Ankudowicz"
+SPDX-License-Identifier = "PolyForm-Noncommercial-1.0.0"
