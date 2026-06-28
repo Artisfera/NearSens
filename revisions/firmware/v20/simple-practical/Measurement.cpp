@@ -1,0 +1,253 @@
+#include "NearSens.h"
+
+uint16_t measurePacket(uint8_t runType, bool *ok) {
+  startMeasureAnimation();
+  prepareMeasurementPower();
+
+  uint16_t values[CAL_PINGS];
+  uint8_t validCount = 0;
+  uint8_t stuckCount = 0;
+  uint8_t rangeCount = 0;
+  uint8_t faultCount = 0;
+  uint8_t noEchoCount = 0;
+  uint8_t pings = (runType == RUN_CALIBRATE) ? CAL_PINGS : MEASURE_PINGS;
+
+  for (uint8_t i = 0; i < pings; i++) {
+    bool valid = false;
+    uint16_t value = measureOnePing(&valid);
+
+    if (valid && validCount < CAL_PINGS) {
+      values[validCount++] = value;
+    } else if (value == LCD_ECHO_STUCK) {
+      stuckCount++;
+    } else if (value == LCD_OUT_OF_RANGE) {
+      rangeCount++;
+    } else if (value == LCD_RX_FAULT) {
+      faultCount++;
+    } else if (value == LCD_NO_ECHO) {
+      noEchoCount++;
+    }
+
+    uint32_t waitUntil = millis() + pingSpacingMs(i);
+    while (!dueMs(millis(), waitUntil)) {
+      serviceBackplane();
+      serviceMeasureAnimation();
+    }
+  }
+
+  finishMeasurementPower();
+  stopMeasureAnimation();
+
+  uint8_t minValid = (runType == RUN_CALIBRATE) ? CAL_MIN_VALID : MEASURE_MIN_VALID;
+  uint8_t minCluster = (runType == RUN_CALIBRATE) ? CAL_MIN_CLUSTER : MEASURE_MIN_CLUSTER;
+  uint16_t clusterMm = (runType == RUN_CALIBRATE) ? CAL_CLUSTER_MM : MEASURE_CLUSTER_MM;
+
+  if (validCount >= minValid) {
+    bool stable = false;
+    uint16_t result = chooseClusterResult(values, validCount, clusterMm, minCluster, &stable);
+    if (stable) {
+      *ok = true;
+      return result;
+    }
+  }
+
+  *ok = false;
+  if (stuckCount >= 2) {
+    return LCD_ECHO_STUCK;
+  }
+  if (rangeCount >= 2) {
+    return LCD_OUT_OF_RANGE;
+  }
+  if (faultCount >= 3) {
+    return LCD_RX_FAULT;
+  }
+  (void)noEchoCount;
+  return LCD_NO_ECHO;
+}
+
+uint16_t measureOnePing(bool *valid) {
+  *valid = false;
+
+  uint16_t minAdc = 1023;
+  uint16_t maxAdc = 0;
+  uint16_t baseline = captureBaseline(&minAdc, &maxAdc);
+  uint16_t noise = maxAdc - minAdc;
+
+  if (baseline <= ADC_RAIL_LOW || baseline >= ADC_RAIL_HIGH ||
+      noise > ADC_NOISE_FAULT) {
+    return LCD_RX_FAULT;
+  }
+
+  uint16_t threshold = (uint16_t)(noise * 2U + ADC_THRESHOLD_EXTRA);
+  if (threshold < ADC_THRESHOLD_MIN) {
+    threshold = ADC_THRESHOLD_MIN;
+  }
+
+  uint16_t farThreshold = (uint16_t)(noise + ADC_FAR_THRESHOLD_EXTRA);
+  if (farThreshold < ADC_FAR_THRESHOLD_MIN) {
+    farThreshold = ADC_FAR_THRESHOLD_MIN;
+  }
+
+  uint32_t txStartUs = micros();
+  sendBurst();
+  uint32_t txEndUs = micros();
+
+  uint32_t scanStartUs = txEndUs + ECHO_GUARD_AFTER_TX_US;
+  uint32_t scanEndUs = txStartUs + ECHO_TIMEOUT_FROM_TX_START_US;
+  uint32_t farEchoStartUs = txStartUs + (((uint32_t)FAR_ECHO_START_MM * 2000UL + 342UL) / 343UL);
+
+  while (true) {
+    uint32_t nowUs = micros();
+    if (dueUs(nowUs, scanStartUs)) {
+      break;
+    }
+    serviceBackplaneAt(nowUs);
+  }
+
+  bool armed = false;
+  uint32_t firstUs = 0;
+  uint16_t peakDeviation = 0;
+  uint8_t confirmHits = 0;
+  uint32_t bestFarUs = 0;
+  uint16_t bestFarDeviation = 0;
+
+  while (true) {
+    uint32_t sampleUs = micros();
+    if (dueUs(sampleUs, scanEndUs)) {
+      break;
+    }
+
+    serviceBackplaneAt(sampleUs);
+    uint16_t adcValue = readEchoAdc();
+    uint16_t deviation = absDiffAdc(adcValue, baseline);
+
+    if (ENABLE_FAR_FALLBACK &&
+        dueUs(sampleUs, farEchoStartUs) &&
+        deviation >= farThreshold &&
+        deviation > bestFarDeviation) {
+      bestFarDeviation = deviation;
+      bestFarUs = sampleUs;
+    }
+
+    if (!armed) {
+      if (deviation >= threshold) {
+        armed = true;
+        firstUs = sampleUs;
+        peakDeviation = deviation;
+        confirmHits = 1;
+      }
+      continue;
+    }
+
+    if (deviation > peakDeviation) {
+      peakDeviation = deviation;
+    }
+
+    if (deviation >= (threshold + ADC_CONFIRM_MARGIN)) {
+      confirmHits++;
+    }
+
+    if (confirmHits >= 2 ||
+        peakDeviation >= (threshold + ADC_STRONG_CONFIRM_MARGIN)) {
+      uint16_t distanceMm = timeOfFlightToMm(firstUs - txStartUs);
+      if (distanceMm >= ECHO_MIN_MM && distanceMm <= ECHO_MAX_MM) {
+        *valid = true;
+        return distanceMm;
+      }
+      if (distanceMm < ECHO_MIN_MM) {
+        return LCD_ECHO_STUCK;
+      }
+      return LCD_OUT_OF_RANGE;
+    }
+
+    if (dueUs(sampleUs, firstUs + ADC_CONFIRM_WINDOW_US)) {
+      armed = false;
+      firstUs = 0;
+      peakDeviation = 0;
+      confirmHits = 0;
+    }
+  }
+
+  if (ENABLE_FAR_FALLBACK &&
+      bestFarUs != 0 &&
+      bestFarDeviation >= (uint16_t)(farThreshold + ADC_FAR_THRESHOLD_EXTRA)) {
+    uint16_t distanceMm = timeOfFlightToMm(bestFarUs - txStartUs);
+    if (distanceMm >= FAR_ECHO_START_MM && distanceMm <= ECHO_MAX_MM) {
+      *valid = true;
+      return distanceMm;
+    }
+    return LCD_OUT_OF_RANGE;
+  }
+
+  return LCD_NO_ECHO;
+}
+
+uint8_t pingSpacingMs(uint8_t pingIndex) {
+  static const uint8_t offsets[4] = {0, 3, 1, 5};
+  return (uint8_t)(INTER_PING_MS + offsets[pingIndex & 0x03]);
+}
+
+uint16_t captureBaseline(uint16_t *minAdc, uint16_t *maxAdc) {
+  uint32_t sum = 0;
+  *minAdc = 1023;
+  *maxAdc = 0;
+
+  for (uint16_t i = 0; i < BASELINE_SAMPLES; i++) {
+    serviceBackplane();
+    uint16_t adcValue = readEchoAdc();
+    sum += adcValue;
+    if (adcValue < *minAdc) {
+      *minAdc = adcValue;
+    }
+    if (adcValue > *maxAdc) {
+      *maxAdc = adcValue;
+    }
+    delayMicroseconds(10);
+  }
+
+  return (uint16_t)((sum + (BASELINE_SAMPLES / 2)) / BASELINE_SAMPLES);
+}
+
+uint16_t chooseClusterResult(uint16_t *values, uint8_t count, uint16_t clusterMm, uint8_t minCluster, bool *stable) {
+  sortValues(values, count);
+  *stable = false;
+
+  /*
+    Practical rule for this hardware: use the first stable distance cluster,
+    not the largest one. A later false lobe can be very repeatable, and the
+    older "largest cluster wins" rule could turn a real 250 mm target into a
+    stable-looking 300 mm reading. The nearest stable echo is the safer choice
+    for a short range 10-50 cm distance meter.
+  */
+  for (uint8_t start = 0; start < count; start++) {
+    uint8_t end = start;
+    while ((uint8_t)(end + 1) < count &&
+           (uint16_t)(values[end + 1] - values[start]) <= clusterMm) {
+      end++;
+    }
+
+    uint8_t members = end - start + 1;
+    if (members >= minCluster) {
+      *stable = true;
+      uint8_t middle = start + (members / 2);
+      if ((members & 0x01) != 0) {
+        return values[middle];
+      }
+      return (uint16_t)(((uint32_t)values[middle - 1] + values[middle] + 1UL) / 2UL);
+    }
+  }
+
+  return values[count / 2];
+}
+
+void sortValues(uint16_t *values, uint8_t count) {
+  for (uint8_t i = 1; i < count; i++) {
+    uint16_t key = values[i];
+    int8_t j = (int8_t)i - 1;
+    while (j >= 0 && values[j] > key) {
+      values[j + 1] = values[j];
+      j--;
+    }
+    values[j + 1] = key;
+  }
+}

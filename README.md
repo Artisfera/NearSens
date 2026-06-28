@@ -1,91 +1,114 @@
-# NearSens 👀
+# NearSens
 
-NearSens is a contactless short-range distance sensing project.
+NearSens is a small contactless distance meter for short range measurement. It uses a 40 kHz ultrasonic transmitter and receiver, an ATtiny1626 microcontroller, an analog receiver path, and a four-digit LCD.
 
-This is not meant to be just another quick module-based build.  
-The goal is to create a **proper mixed-signal distance sensor** with:
+The current prototype is built around a practical 5 V setup and a useful range of about 100 to 500 mm. The goal was not to make a universal sensor module. The goal was to make a simple device that can be built, tested, calibrated, and understood without hiding the hardware behind a black box.
 
-- a practical form factor
-- a **5 V supply**
-- a **target range of about 10 to 50 cm**
-- **very low average power consumption**
-- and a design that stays as simple and low-cost as possible
+## Main assumptions
 
-This repository is meant to be both:
+- external 5 V DC supply
+- ultrasonic time-of-flight measurement
+- practical range around 100 to 500 mm
+- four-digit LCD readout
+- simple two-button interface
+- five-point calibration stored in EEPROM
+- low part count and low cost where possible
+- firmware kept readable enough to debug on real hardware
 
-- a technical workspace 🛠️
-- a public proof of work 📚
+## How it works
 
----
+The microcontroller sends a short ultrasonic burst through the transmitter driver. The receiver picks up the echo, the analog path amplifies and filters it, and the firmware searches for a valid reflected signal in the expected time window.
 
-## Project idea
+The distance is calculated from echo return time. Calibration points at 100, 200, 300, 400 and 500 mm are stored in EEPROM and used to correct later measurements.
 
-NearSens is a standalone contactless distance measurement device focused on close-range sensing.
+## Hardware overview
 
-The main idea is to bring together:
+The main hardware blocks are:
 
-- sensing
-- analog and digital signal handling
-- simple embedded control
-- direct visual output
+- ATtiny1626 microcontroller
+- ST232CDR used as the ultrasonic transmitter driver
+- 40 kHz ultrasonic transmitter and receiver
+- LM324 receiver path
+- MC14543BDG LCD drivers
+- DE117 four-digit LCD
+- two tactile buttons, TS3 and TS4
+- external 5 V input through PS1
 
-into one compact and understandable system.
+R4 is a 220 ohm THT resistor added in the receiver/filter path after testing. It is listed separately in the BOM.
 
-I do not just want to build something that works.  
-I want to build it in a way that is technically honest, clearly documented, and genuinely worth sharing in public.
+## Repository layout
 
----
+```text
+docs/
+  NearSens_project_documentation.pdf
+  NearSens_user_guide.pdf
 
-## Main goals
+hardware/
+  schematic/   schematic preview and EasyEDA source
+  pcb/         PCB source, outline and previews
+  gerber/      PCB production files
+  enclosure/   STL models
 
-The current goals of NearSens are:
+firmware/
+  NearSens_1.0.0/   current firmware source
 
-- contactless distance sensing
-- useful operation in the 10-50 cm range
-- 5 V power supply
-- very low average power consumption
-- low component cost
-- practical and readable standalone output
-- simple but serious hardware architecture
-- clear public documentation of the development process, 
-so you and other people can understand it, learn from it, and even build their own version at home!
+bom/
+  NearSens_BOM_v1.0.0.csv
 
----
+revisions/
+  earlier schematic, PCB, firmware and enclosure versions
 
-## What makes NearSens different
+JOURNAL.md
+  build log exported from Stasis
+```
 
-NearSens is not being developed as a generic Arduino-style demo.
+## Documentation
 
-It is being built as a **mixed-signal hardware project**, where the sensing path, control logic, measurement handling, and output method are treated as parts of one coherent system.
+Start here:
 
-Just as important, I want to show the project publicly in a way that reflects real work, not just the final polished result. That includes:
+- [Project documentation](docs/NearSens_project_documentation.pdf)
+- [Use and calibration guide](docs/NearSens_user_guide.pdf)
+- [Bill of materials](bom/NearSens_BOM_v1.0.0.csv)
 
-- design decisions
-- revisions
-- measurements
-- trade-offs
-- experiments
-- mistakes and fixes
-- final presentation
+The `revisions` folder is an archive of earlier work. The current files are in `docs`, `hardware`, `firmware` and `bom`.
 
-That matters to me because I want this repository to be useful in two ways:
+## Firmware
 
-- as real technical documentation
-- as a portfolio piece that shows the full process, not just the end result
+Current firmware is in:
 
----
+```text
+firmware/NearSens_1.0.0/
+```
 
-## Versioning note
+It was prepared for Arduino IDE with the megaTinyCore package and ATtiny1626 running at 5 MHz.
 
-This project uses my own versioning system:
+Main controls:
 
-`X.Y.Z`
+- TS3 makes a measurement
+- TS4 toggles the 75 mm reference correction
+- holding TS3 and TS4 enters calibration
+- five quick TS3 clicks toggle RAW mode
 
-- **X** , main version  
-  A finished major version where everything that was supposed to work is working.
+Normal use does not need a computer. A 5 V DC supply is enough to power the prototype and take measurements.
 
-- **Y** , subversion  
-  Not fully finished, but stable and solid for the current stage. Not everything is done yet, but the parts that should work already work and do not crash.
+## Calibration
 
-- **Z** , sub-subversion  
-  The latest saved change inside a version or subversion. This is basically a raw progress marker, so there is a good chance that something that should work still does not work yet. 🧪
+Calibration uses five points:
+
+```text
+100 mm
+200 mm
+300 mm
+400 mm
+500 mm
+```
+
+Use a flat, hard target placed perpendicular to the ultrasonic transducers. Soft materials, angled surfaces and nearby reflections can make the result unstable.
+
+## Status
+
+This repository contains the v1.0.0 prototype documentation, firmware and hardware files. It is a working prototype, not a finished commercial product. Some parts of the history are kept in `revisions` because they show how the design changed over time.
+
+## Author
+
+Patryk Ankudowicz

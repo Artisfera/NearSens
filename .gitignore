@@ -1,0 +1,16 @@
+# Local temporary files
+/#temp/
+
+# Arduino / build artifacts
+build/
+*.elf
+*.bin
+*.eep
+*.lst
+*.map
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

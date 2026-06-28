@@ -1,0 +1,27 @@
+NearSens v11 ready, change list compared with v10
+
+1. Calibration
+- The previous model used 100/300/500 points and piecewise interpolation.
+- If raw500 was stored close to raw300, the code could silently use a wrong segment or extrapolate, which could produce a 35 cm -> 30/31 cm effect.
+- v11 uses only one 500 mm point as a global offset.
+- raw500 must be within the 380-650 mm window. If not, calibration shows 4004 and does not write EEPROM.
+
+2. EEPROM
+- Calibration data version was changed to 6.
+- Old versions are not loaded, to avoid carrying damaged calibration into this firmware.
+
+3. Buttons
+- TS3 short press: measurement.
+- TS4 short press: toggle front/body reference.
+- TS3+TS4 for 5 s: 500 mm calibration.
+- Individual long press of TS3 or TS4 no longer stores 100/300 points.
+
+4. Measurement
+- Far fallback is disabled.
+- Measurement cluster was reduced from 65 mm to 25 mm.
+- Calibration cluster was reduced from 35 mm to 25 mm.
+
+5. LCD and power
+- Idle 8888 is intentional.
+- Deep sleep with LCD blanking was disabled in this version so the user does not see a seemingly dead LCD after some time.
+- MAX232 and ADC are still turned off outside measurement.

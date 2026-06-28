@@ -1,0 +1,26 @@
+NAME;QUANTITY;DISTRIBUTOR;TOTAL COST (USD);LINK;Designator
+1 uF MLCC capacitor, 0805, 10%;5;TME;0,2895;https://www.tme.eu/pl/en/details/cl21b105kafnnng/mlcc-smd-capacitors/samsung/;C1,C2,C3,C4,C5
+10 uF MLCC capacitor, 1206, 10%;1;TME;0,0908;https://www.tme.eu/pl/en/details/grm31cr61e106ka12l/mlcc-smd-capacitors/murata/;C7
+100 nF MLCC capacitor, 0603, 10%;6;TME;0,1279;https://www.tme.eu/pl/en/details/cl10b104kb8wpnc/mlcc-smd-capacitors/samsung/;C8,C10,C11,C12,C13,C19
+10 nF MLCC capacitor, 0603, 10%;3;TME;0,0307;https://www.tme.eu/pl/en/details/cl10b103kb8nnnc/mlcc-smd-capacitors/samsung/;C14,C15,C18
+1 nF MLCC capacitor, 0603, 10%;2;TME;0,0212;https://www.tme.eu/pl/en/details/cl10b102kb8nnnc/mlcc-smd-capacitors/samsung/;C16,C17
+DE 117-TS-20/7,5/V four-digit LCD;1;TME;1,5441;https://www.tme.eu/pl/details/de117-ts-20_7.5/wyswietlacze-lcd-cyfrowe/display-elektronik/de-117-ts-20-7-5-v/;L1
+TE0201820000G 2-pin right-angle terminal;1;TME;0,3428;https://www.tme.eu/pl/en/details/te0201820000g/pcb-terminal-blocks/amphenol-anytek/;PS1
+BC807-40 PNP transistor, SOT-23;1;TME;0,1185;https://www.tme.eu/en/details/bc807-40-dio/pnp-smd-transistors/diotec-semiconductor/bc807-40/;Q1
+220 ohm THT resistor;1;local stock;0;;R4
+1 kohm resistor, 0603, 1%;1;TME;0,0088;https://www.tme.eu/pl/details/smd0603-1k-1%25/rezystory-smd/royalohm/0603saf1001t5e/;R1
+75 kohm resistor, 0603, 1%;2;TME;0,0296;https://www.tme.eu/pl/en/details/smd0603-75k-1%25/smd-resistors/royalohm/0603saf7502t5e/;R2,R5
+10 kohm resistor, 0603, 1%;3;TME;0,0279;https://www.tme.eu/pl/en/details/smd0603-10k-1%25/smd-resistors/royalohm/0603saf1002t5e/;R3,R11,R17
+100 kohm resistor, 0603, 1%;1;TME;0,0136;https://www.tme.eu/pl/en/details/smd0603-100k-1%25/smd-resistors/royalohm/0603saf1003t5e/;R16
+56 kohm resistor, 0603, 1%;1;TME;0,0148;https://www.tme.eu/pl/en/details/smd0603-56k-1%25/smd-resistors/royalohm/0603saf5602t5e/;R18
+6,2 kohm resistor, 0603, 1%;1;TME;0,0273;https://www.tme.eu/pl/en/details/crcw06036k20fktabc/smd-resistors/vishay/;R19
+7,5 kohm resistor, 0603, 1%;1;TME;0,0062;https://www.tme.eu/pl/en/details/rc0603fr-077k5/smd-resistors/yageo/rc0603fr-077k5l/;R20
+4,7 kohm resistor, 0603, 1%;1;TME;0,0119;https://www.tme.eu/pl/en/details/smd0603-4k7-1%25/smd-resistors/royalohm/0603saf4701t5e/;R21
+DS1041-01-113KKA16010 tactile switch;2;TME;0,1517;https://www.tme.eu/pl/details/tact4101-113160-a/mikroprzelaczniki-tact/connfly/ds1041-01-113kka16010/;TS3, TS4
+ST232CDR line driver, SO-16;1;TME;0,8312;https://www.tme.eu/pl/details/st232cdr/uklady-scalone-rs232-rs422-rs485/stmicroelectronics/;U1
+ATtiny1626-SU microcontroller, SO-20;1;TME;1,3805;https://www.tme.eu/pl/en/details/attiny1626-su/8-bit-avr-family/microchip-technology/;U2
+LM324DT quad operational amplifier, SO-14;1;TME;0,1897;https://www.tme.eu/pl/en/details/lm324dt/smd-operational-amplifiers/stmicroelectronics/;U4
+MC14543BDG LCD decoder/driver, SO-16;4;TME;1,8176;https://www.tme.eu/pl/en/details/mc14543bdg/decoders-multiplexers-switches/onsemi/;U5,U6,U7,U8
+16 mm ultrasonic transducer set, TX + RX, 40 kHz;1;Botland;3,0586;https://botland.com.pl/ultradzwiekowe-czujniki-distance/1209-czujniki-ultradzwiekowe-16mm-komplet-5904422355920.html;UT-T, UT-R
+NearSens PCB v1.2.0;1;JLCPCB;1,66;;
+TOTAL;;;11,7949;;

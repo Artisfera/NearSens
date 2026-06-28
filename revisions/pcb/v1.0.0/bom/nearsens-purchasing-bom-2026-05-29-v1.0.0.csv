@@ -1,0 +1,28 @@
+ID,Name,Quantity,Unit Price,Final Price,Link,Manufacturer Part,Manufacturer,Supplier,Supplier Part,Designator
+1,1u,5,"0,15",,https://www.tme.eu/pl/en/details/cl21b105kafnnng/mlcc-smd-capacitors/samsung/,,,TME,,"C1,C2,C3,C4,C5"
+2,10u,1,"0,15",,https://www.tme.eu/pl/en/details/grm31cr61e106ka12l/mlcc-smd-capacitors/murata/,,,TME,,C7
+3,100n,6,"0,15",,https://www.tme.eu/pl/en/details/cl10b104kb8wpnc/mlcc-smd-capacitors/samsung/,,,TME,,"C8,C10,C11,C12,C13,C19"
+4,10n,3,"0,15",,https://www.tme.eu/pl/en/details/cl10b103kb8nnnc/mlcc-smd-capacitors/samsung/,,,TME,,"C14,C15,C18"
+5,1n,2,"0,15",,https://www.tme.eu/pl/en/details/cl10b102kb8nnnc/mlcc-smd-capacitors/samsung/,,,TME,,"C16,C17"
+8,"DE 117-TS-20/7,5/V",1,"5,817",,https://www.tme.eu/pl/details/de117-ts-20_7.5/wyswietlacze-lcd-cyfrowe/display-elektronik/de-117-ts-20-7-5-v/,"DE 117-TS-20/7,5/V",DISPLAY ELEKTRONIK,TME,DE117-TS-20/7.5,L1
+9,M023.5MM,1,"1,67",,https://www.tme.eu/pl/en/details/tad05-02-1-l-g/pcb-terminal-blocks/gct/,TAD05-02-1-L-G,GCT,TME,TAD05-02-1-L-G,PS1
+10,BC857A,1,"0,15",,https://www.tme.eu/pl/details/bc857a-dio/tranzystory-pnp-smd/diotec-semiconductor/bc857a/,BC857A,DIOTEC SEMICONDUCTOR,TME,BC857A-DIO,Q1
+11,1k,2,"0,15",,https://www.tme.eu/pl/en/details/era3aeb102v/smd-resistors/panasonic/,,,TME,,"R1,R4"
+12,75k,2,"0,15",,https://www.tme.eu/pl/en/details/era3aeb753v/smd-resistors/panasonic/,,,TME,,"R2,R5"
+13,10k,3,"0,15",,https://www.tme.eu/pl/en/details/era3aeb103v/smd-resistors/panasonic/,,,TME,,"R3,R11,R17"
+14,100k,1,"0,15",,https://www.tme.eu/pl/en/details/era3aeb104v/smd-resistors/panasonic/,,,TME,,R16
+15,56k,1,"0,15",,https://www.tme.eu/pl/en/details/era3aeb563v/smd-resistors/panasonic/,,,TME,,R18
+16,6k2,1,"0,15",,https://www.tme.eu/pl/en/details/era3aeb622v/smd-resistors/panasonic/,,,TME,,R19
+17,7k5,1,"0,15",,https://www.tme.eu/pl/en/details/era3aeb752v/smd-resistors/panasonic/,,,TME,,R20
+18,4k7,1,"0,15",,https://www.tme.eu/pl/en/details/era3aeb472v/smd-resistors/panasonic/,,,TME,,R21
+19,Tact button,2,"0,28",,https://www.tme.eu/pl/details/tact4101-113160-a/mikroprzelaczniki-tact/connfly/ds1041-01-113kka16010/,DS1041-01-113KKA16010,CONNFLY,TME,TACT4101-113160-A,"TS3, TS4"
+21,MAX232,1,"5,8",,https://www.tme.eu/pl/details/max232eidr/uklady-scalone-rs232-rs422-rs485/texas-instruments/,MAX232EIDR,TEXAS INSTRUMENTS,TME,MAX232EIDR,U1
+22,ATTINY1626-SU,1,"5,205",,https://www.tme.eu/pl/en/details/attiny1626-su/8-bit-avr-family/microchip-technology/,ATTINY1626-SU,MICROCHIP TECHNOLOGY,TME,ATTINY1626-SU,U2
+23,LM324-DT,1,"0,71",,https://www.tme.eu/pl/en/details/lm324dt/smd-operational-amplifiers/stmicroelectronics/,LM324DT,STMicroelectronics,TME,LM324DT,U4
+24,MC14543BDG,4,"1,7085",,https://www.tme.eu/pl/en/details/mc14543bdg/decoders-multiplexers-switches/onsemi/,MC14543BDG,ONSEMI,TME,MC14543BDG,"U5,U6,U7,U8"
+26,Ultrasonic  transmitter & receiver,2,"5,525",,https://botland.com.pl/ultradzwiekowe-czujniki-distance/1209-czujniki-ultradzwiekowe-16mm-komplet-5904422355920.html,,,Botland,,"UT-T, UT-R"
+,PCB board,1,15,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,"43,8155",,,,,,,
