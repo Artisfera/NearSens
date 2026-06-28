@@ -118,10 +118,10 @@ Firmware and source code are licensed under the PolyForm Noncommercial License 1
 
 Hardware design files, PCB files, CAD files, Gerbers, documentation, BOM, images and journal files are licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International. The official license text is in [LICENSES/CC-BY-NC-SA-4.0.txt](LICENSES/CC-BY-NC-SA-4.0.txt).
 
-Required attribution: `NearSens by Patryk Ankudowicz`.
+Required attribution: `NearSens by Patryk Ankudowicz (Artisfera)`.
 
 Commercial use is not granted by these licenses. Contact the author for separate permission.
 
 ## Author
 
-Patryk Ankudowicz
+Patryk Ankudowicz (Artisfera)
